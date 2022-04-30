@@ -16,9 +16,8 @@ theme:
     - navigation.indexes
     - navigation.top
   logo: res/brain-20-256.png
-  # favicon: images/favicon.gif
-  # icon:
-  #   repo: fontawesome/brands/gitlab
+  favicon: res/brain-20-256.png
+
 markdown_extensions:
   - pymdownx.tasklist
   - footnotes
