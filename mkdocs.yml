@@ -1,0 +1,40 @@
+site_name: Understanding Intelligence
+
+# Configuration
+theme:
+  name: material
+  language: en
+  palette:
+    primary: blue
+    accent: blue
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+  logo: res/brain-20-256.png
+  # favicon: images/favicon.gif
+  # icon:
+  #   repo: fontawesome/brands/gitlab
+markdown_extensions:
+  - pymdownx.tasklist
+  - footnotes
+
+plugins:
+    - search
+    - awesome-pages
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/guillermobarbadillo/
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/_ironbar_
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/channel/UCOHmUwHnd2hmUpiDzaQ1Isg
+    - icon: fontawesome/brands/kaggle
+      link: https://www.kaggle.com/ironbar
