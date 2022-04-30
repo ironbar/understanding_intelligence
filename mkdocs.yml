@@ -25,6 +25,7 @@ theme:
 markdown_extensions:
   - pymdownx.tasklist
   - footnotes
+  - tables
 
 plugins:
     - search
@@ -44,3 +45,5 @@ extra:
   analytics:
     provider: google
     property: G-NHD48GJZG9
+repo_url: https://github.com/ironbar/understanding_intelligence
+#repo_name: ironbar/understanding_intelligence
