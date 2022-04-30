@@ -11,6 +11,10 @@ theme:
     text: Roboto
     code: Roboto Mono
   features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     - navigation.expand
     - navigation.indexes
