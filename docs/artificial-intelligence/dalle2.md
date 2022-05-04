@@ -29,3 +29,5 @@ So language seems to be a key ingredient for achieving generalization.
 
 It seems that an embedding is a universal representation method. There are word embeddings, text
 embeddings, biometric embeddings, image embeddings...
+
+TODO
