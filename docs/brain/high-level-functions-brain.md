@@ -45,11 +45,26 @@ signal to learn useful features for perception.
 
 ## Attention
 
+> Attention is the behavioral and cognitive process of selectively concentrating on a discrete aspect of information, whether considered subjective or objective, while ignoring other perceivable information.
+> Attention has also been described as the allocation of limited cognitive processing resources.
+> Attention is manifested by an attentional bottleneck, in term of the amount of data the brain can process each second; for example, in human vision, only less than 1% of the visual input data (at around one megabyte per second) can enter the bottleneck,[3][4] leading to inattentional blindness. [^5]
+
+We are receiving a lot of information and it seems that we cannot attend to all of it consciously. Instead
+we have to focus on a small part of the inputs. In the previous planning section we have advanced that
+surprising events can gather the attention.
+
 ## Judgment
 
 ## Decision-making
 
+> In psychology, decision-making (also spelled decision making and decisionmaking) is regarded as the cognitive process resulting in the selection of a belief or a course of action among several possible alternative options. It could be either rational or irrational. The decision-making process is a reasoning process based on assumptions of values, preferences and beliefs of the decision-maker. Every decision-making process produces a final choice, which may or may not prompt action. [^6]
+
+It is interesting because I was thinking that decision-making was the same as planning, but the irrational
+part changes all. That links the process of decision-making to the emotions.
+
 ## Emotion
+
+> Emotions are mental states brought on by neurophysiological changes, variously associated with thoughts, feelings, behavioural responses, and a degree of pleasure or displeasure. There is currently no scientific consensus on a definition. Emotions are often intertwined with mood, temperament, personality, disposition, or creativity. [^7]
 
 ## Motor skills
 
@@ -63,3 +78,6 @@ signal to learn useful features for perception.
 [^2]: https://en.wikipedia.org/wiki/Language
 [^3]: https://en.wikipedia.org/wiki/Memory
 [^4]: https://en.wikipedia.org/wiki/Planning
+[^5]: https://en.wikipedia.org/wiki/Attention
+[^6]: https://en.wikipedia.org/wiki/Decision-making
+[^7]: https://en.wikipedia.org/wiki/Emotion
