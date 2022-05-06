@@ -460,7 +460,15 @@ trained with natural language is vastly superior.</p>
 <h2 id="the-role-of-embeddings">The role of embeddings</h2>
 <p>It seems that an embedding is a universal representation method. There are word embeddings, text
 embeddings, biometric embeddings, image embeddings...</p>
-<p>TODO</p>
+<p>From the point of view of information an embedding is a sequence of numbers. I could encode a maximum
+of different <code>m^n</code> states in an embedding of length <code>n</code> if each dimension has <code>m</code> bits. The biggest
+clip embedding size is 1024. In this context the number of bits will be how many different partitions
+we can make of each dimension. With float32 each dimension has 4 bytes so that would be a total of 32 bits
+that will theoretically enable a partition of 2^32. However neural networks are noisy so let's take
+a pessimistic lower bound that says that each dimension can only hold two partitions (positive and negative).
+In that case the number of different states that the embedding could store is <code>2^1024 ~ 10^313</code>, a number much bigger than <code>10^82</code> which is the number of atoms in the observable universe.</p>
+<p>Thus we can see that the embeddings can encode a ton of information. However to be able to use
+that information we need a big encoder or decoder, because the embedding alone does not mean anything.</p>
                 
               
               
