@@ -30,4 +30,13 @@ So language seems to be a key ingredient for achieving generalization.
 It seems that an embedding is a universal representation method. There are word embeddings, text
 embeddings, biometric embeddings, image embeddings...
 
-TODO
+From the point of view of information an embedding is a sequence of numbers. I could encode a maximum
+of different `m^n` states in an embedding of length `n` if each dimension has `m` bits. The biggest
+clip embedding size is 1024. In this context the number of bits will be how many different partitions
+we can make of each dimension. With float32 each dimension has 4 bytes so that would be a total of 32 bits
+that will theoretically enable a partition of 2^32. However neural networks are noisy so let's take
+a pessimistic lower bound that says that each dimension can only hold two partitions (positive and negative).
+In that case the number of different states that the embedding could store is `2^1024 ~ 10^313`, a number much bigger than `10^82` which is the number of atoms in the observable universe.
+
+Thus we can see that the embeddings can encode a ton of information. However to be able to use
+that information we need a big encoder or decoder, because the embedding alone does not mean anything.
