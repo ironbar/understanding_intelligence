@@ -2,7 +2,7 @@ serve: # serves the wiki
 	mkdocs serve
 
 install: # install python dependencies
-	pip install mkdocs mkdocs-material mkdocs-awesome-pages-plugin
+	pip install mkdocs mkdocs-material mkdocs-awesome-pages-plugin mkdocs-git-revision-date-plugin
 
 deploy:
 	git push
