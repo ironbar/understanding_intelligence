@@ -7,6 +7,8 @@ release of the paper and blogpost some impressive dialogs have been shown on twi
 
 ![obama dialog](res/2022-05-10-18-24-45.png)
 
+![cat](res/2022-05-10-18-37-17.png)
+
 Flamingo is able to receive text, images and video interleaved and returns text as output.
 
 ## How it works?
