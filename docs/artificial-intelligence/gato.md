@@ -5,7 +5,7 @@ by Deepmind short after [Flamingo](./flamingo.md) on May 2022.
 
 ![gato summary](res/2022-05-15-10-33-58.png)
 
-The idea is to train a Flamingo like model in a bunch of different tasks. Gato is much smaller than Flamingo:
+The idea is to train a model that can receive both text and images as inputs (like Flamingo) in a bunch of different tasks. Gato is much smaller than Flamingo:
 1.2B vs 80B. This is motivated because they want to be able to execute the model in real time for
 robotics tasks.
 
@@ -30,7 +30,7 @@ generalist models higher up the scaling law curve. For simplicity Gato was train
 supervised manner; however, in principle, there is no reason it could not also be trained with either
 offline or online reinforcement learning (RL).
 
-<!-- -->
+That is true but RL is much harder than supervised learning.
 
 > As described above, Gato’s network architecture has two main components: the parameterized embedding function which transforms tokens to token embeddings, and the sequence model which outputs a distribution over the next discrete token. While any general sequence model can work for next token prediction, we chose a transformer (Vaswani et al., 2017) for simplicity and scalability. Gato uses a 1.2B parameter decoder-only transformer with 24 layers, an embedding size of 2048, and a post-attention feedforward hidden size of 8196 (more details in Section C.1).
 
