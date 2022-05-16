@@ -13,3 +13,6 @@ build:
 
 clean:
 	rm -r site
+
+open-website:
+	xdg-open https://ironbar.github.io/understanding_intelligence/ &
