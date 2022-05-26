@@ -115,3 +115,42 @@ it that is the case it could sell it to its costumers as an upgrade.
 
 At this moment I cannot imagine an obstacle, so apparently is just a matter of time that Tesla gets
 to autonomous driving. They seem to have all the needed ingredients.
+
+## Thoughts
+
+![system schema draft](res/2022-05-26-18-49-17.png)
+
+It's an hybrid system because it combines different kinds of algorithms.
+
+In this context the state of the world is the location, speed, acceleration and
+state of all the elements of the road.
+
+The finality of the sensors/senses is to find the state of the world. That is true for every system
+and living being. So it is nice that in the Tesla car we find that goal very explicitly.
+
+What is a good representation of the world? In this case it is forced to be the elements that are
+used later for planning.  
+Another view would be all the necessary information to predict the future (world model). A more narrow view would be
+all the information needed to maximize the reward (value function or policy). The first one is more
+general but needs more capacity. The other one is simpler but will be more difficult to adapt to
+changes in the environment.
+
+Humans create an internal representation of the world and they live in that representation. We constantly
+create predictions about the future and update our beliefs if they fail. Those predictions can have
+different timescales.
+
+![sketch human mind](res/2022-05-26-19-02-21.png)
+
+The world model can be queried to:
+
+- Recall elements from the past
+- Imagine or predict future situations
+
+It feels like a module is missing on the previous drawing. Some sequential module that we could
+call consciousness and whose task is to direct the flow of information. It can use the world
+model for planning, understand if the goal is met, use the system 1 when possible...
+A module like that could be trained with reinforcement learning.
+
+![director](res/2022-05-26-19-04-49.png)
+
+I should think more deeply about the world model and the director modules on coming weeks.
