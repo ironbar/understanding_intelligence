@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://ironbar.github.io/understanding_intelligence/artificial-intelligence/active-dendrites/">
+        <link rel="canonical" href="https://ironbar.github.io/understanding_intelligence/artificial-intelligence/model-based-rl/">
       
       <link rel="icon" href="../../res/brain-20-256.png">
       <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.15">
     
     
       
-        <title>Avoiding Catastrophical Forgetting with Active Dendrites - Understanding Intelligence</title>
+        <title>Model Based Reinforcement Learning - Understanding Intelligence</title>
       
     
     
@@ -75,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#avoiding-catastrophical-forgetting-with-active-dendrites" class="md-skip">
+        <a href="#model-based-reinforcement-learning" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Avoiding Catastrophical Forgetting with Active Dendrites
+              Model Based Reinforcement Learning
             
           </span>
         </div>
@@ -207,7 +207,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="./" class="md-tabs__link md-tabs__link--active">
+      <a href="../active-dendrites/" class="md-tabs__link md-tabs__link--active">
         Artificial intelligence
       </a>
     </li>
@@ -373,59 +373,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Avoiding Catastrophical Forgetting with Active Dendrites
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../active-dendrites/" class="md-nav__link">
         Avoiding Catastrophical Forgetting with Active Dendrites
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
-    Summary
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#thoughts" class="md-nav__link">
-    Thoughts
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -477,11 +429,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../model-based-rl/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Model Based Reinforcement Learning
       </a>
+      
     </li>
   
 
@@ -647,28 +609,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
-    Summary
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#thoughts" class="md-nav__link">
-    Thoughts
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -679,64 +619,47 @@
             <article class="md-content__inner md-typeset">
                
                 
-  <a href="https://github.com/ironbar/understanding_intelligence/edit/master/docs/artificial-intelligence/active-dendrites.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/ironbar/understanding_intelligence/edit/master/docs/artificial-intelligence/model-based-rl.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="avoiding-catastrophical-forgetting-with-active-dendrites">Avoiding Catastrophical Forgetting with Active Dendrites</h1>
-<p><a href="https://arxiv.org/abs/2201.00042">Paper</a> and <a href="https://www.youtube.com/watch?v=O_dJ31T01i8">Yannic Kilcher video</a></p>
-<h2 id="summary">Summary</h2>
-<blockquote>
-<p>Standard Artificial Neural Networks (ANNs) often fail dramatically when learning multiple tasks, a phenomenon known as catastrophic forgetting where the network forgets previously learned information.</p>
-</blockquote>
-<!---->
-
-<blockquote>
-<p>Today it is well known that the point neuron assumption is an oversimplified model of biological computations. Proximal synapses (close to the cell body) have a linear impact on the neuron, but the vast majority of synapses are located on distal dendritic segments (far from the cell body) and individually have minimal impact on the cell. These distal segments process groups of synapses locally in a non-linear fashion, and are known as active dendrites . Empirical evidence suggests that each distal dendritic segment acts as a separate active subunit performing its own local computation. Modeling studies show that neurons with active dendrites are more powerful and complex than the point neuron model can accommodate.</p>
-</blockquote>
-<!---->
-
-<blockquote>
-<p>This suggests that basal active dendrites have a modulatory, long-lasting impact on the cell’s response, with a very different role than proximal, or feedforward, inputs</p>
-</blockquote>
-<!---->
-
-<blockquote>
-<p>Neural circuits in the neocortex are highly sparse.</p>
-</blockquote>
-<p><img alt="architecture schema" src="../res/2022-05-26-17-50-41.png" /></p>
-<p>The idea is to use a context to modulate the activation of the neurons and next
-to induce sparsity with a k winners take it all layer (kWTA). This two modifications to
-the standard neural network work together to do modify only a small sparse subset
-of the network for each input.</p>
-<p>This happens because the kWTA blocks the gradients of all the units that are set
-to zero. And the context modulates the activations, thus influencing which units
-will be zeroed and which won't.</p>
-<p>So in essence is like having multiple subnetworks inside a single network.</p>
-<h2 id="thoughts">Thoughts</h2>
-<p>The proposed architecture is interesting and could be an inspiration for future
-custom networks. I would like to see if this could scale to bigger models.</p>
-<p>I have found one sentence of the paper very intriguing:</p>
-<blockquote>
-<p>. Liu et al. [2019], Maninis et al. [2019] demonstrate that attention-based architectures could also prevent task interference in multi-task learning scenarios</p>
-</blockquote>
-<p>Is this implying that transformers do not suffer from catastrophical forgetting in a multi-task
-learning scenario?</p>
-<p>The cited papers are <a href="https://arxiv.org/abs/1803.10704">End-to-End Multi-Task Learning with Attention</a> and <a href="https://arxiv.org/abs/1904.08918">Attentive Single-Tasking of Multiple Tasks</a>. Those papers do
-not talk about transformers but about adding an attention mechanism can help to multi-task learning.
-Since the transformer architecture is based on attention we could make the assumption that it will
-also have good properties for multi-task learning. And moreover we have the recent publication of <a href="../gato/">Gato</a> that shows that a transformer can learn to do a lot of tasks.</p>
-<p>So probably choosing a transformer as the architecture has more sense than implementing the proposed
-changes on a more classic architecture.</p>
+<h1 id="model-based-reinforcement-learning">Model Based Reinforcement Learning</h1>
+<h1 id="work-in-progress">🚧 Work in progress 🚧</h1>
+<h2 id="motivation">Motivation</h2>
+<p>In the past I have followed <a href="https://www.deepmind.com/learning-resources/reinforcement-learning-lecture-series-2018">DeepMind's RL course</a> and know I'm doing the <a href="https://github.com/huggingface/deep-rl-class">Hugginface's RL course</a> to remember the concepts. However they do not dig deep into model based
+RL and that's what I want to do it now.</p>
+<p>In <a href="https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf">Sutton and Barto</a> book I cannot find either anything about model based RL.</p>
+<p>I believe world models will play a big role in the road of AGI. Without a world
+model is not possible to plan, so we need them to achieve complex thinking and
+reasoning.</p>
+<h2 id="resources">Resources</h2>
+<p>Let's search for learning resources and list them to prioritize them.</p>
+<h3 id="youtube">Youtube</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=_rKzhhDRq_4">Model-free vs Model-based Reinforcement Learning -- Oriol Vinyals (11/10/2020)</a></li>
+<li><a href="https://www.youtube.com/watch?v=0MjI2NA_s4c">World-Models 🌍 Model Based Reinforcement Learning</a>. Describes two challenges of world models: partial observability and randomness</li>
+<li><a href="https://www.youtube.com/watch?v=2o1yrkbpcUk">Pieter Abbel's Lecture on Model-based RL</a></li>
+<li><a href="https://www.youtube.com/watch?v=dPsXxLyqpfs&amp;t">Yannic Kilcher World Models</a></li>
+<li><a href="https://www.youtube.com/watch?v=56GW1IlWgMg">Yannic Kilcher Learning model-based planning from scratch</a></li>
+<li><a href="https://www.youtube.com/watch?v=HnZDmxYnpg4">Harri Valpola: System 2 AI and Planning in Model-Based Reinforcement Learning</a></li>
+<li><a href="https://www.youtube.com/watch?v=o75ybZ-6Uu8">https://www.youtube.com/watch?v=o75ybZ-6Uu8</a></li>
+</ul>
+<h3 id="papers">Papers</h3>
+<ul>
+<li><a href="https://arxiv.org/abs/2006.16712">Model-based Reinforcement Learning: A Survey</a></li>
+<li><a href="https://ai.googleblog.com/2019/02/introducing-planet-deep-planning.html">PlaNet: A Deep Planning Network for Reinforcement Learning</a></li>
+<li><a href="https://arxiv.org/abs/1912.01603">Dream to Control: Learning Behaviors by Latent Imagination</a></li>
+<li><a href="https://arxiv.org/abs/2010.02193">Mastering Atari with Discrete World Models</a></li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      2022-05-26
+      2022-05-28
     
   </small>
 </div>
@@ -798,7 +721,7 @@ changes on a more classic architecture.</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../about/" class="md-footer__link md-footer__link--prev" aria-label="Previous: About" rel="prev">
+        <a href="../gato/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Gato" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -807,20 +730,20 @@ changes on a more classic architecture.</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              About
+              Gato
             </div>
           </div>
         </a>
       
       
         
-        <a href="../dalle2/" class="md-footer__link md-footer__link--next" aria-label="Next: Dall-e 2" rel="next">
+        <a href="../tesla-ai-day-2021/" class="md-footer__link md-footer__link--next" aria-label="Next: Tesla AI Day 2021" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Dall-e 2
+              Tesla AI Day 2021
             </div>
           </div>
           <div class="md-footer__button md-icon">
