@@ -33,3 +33,4 @@ Let's search for learning resources and list them to prioritize them.
 - [PlaNet: A Deep Planning Network for Reinforcement Learning](https://ai.googleblog.com/2019/02/introducing-planet-deep-planning.html)
 - [Dream to Control: Learning Behaviors by Latent Imagination](https://arxiv.org/abs/1912.01603)
 - [Mastering Atari with Discrete World Models](https://arxiv.org/abs/2010.02193)
+- [MuZero: Mastering Go, chess, shogi and Atari without rules](https://www.deepmind.com/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules)
