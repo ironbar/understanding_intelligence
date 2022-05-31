@@ -19,9 +19,9 @@ Let's search for learning resources and list them to prioritize them.
 
 ### Youtube
 
-- [Model-free vs Model-based Reinforcement Learning -- Oriol Vinyals (11/10/2020)](https://www.youtube.com/watch?v=_rKzhhDRq_4)
+- [Model-free vs Model-based Reinforcement Learning -- Oriol Vinyals (11/10/2020)](https://www.youtube.com/watch?v=_rKzhhDRq_4) A talk about AlphaGo, AlphaStar, Alphazero... Some initial ideas about the differences between model-free and model-based but most of the talk is about the experience of Oriol with those mentioned projects.
 - [World-Models 🌍 Model Based Reinforcement Learning](https://www.youtube.com/watch?v=0MjI2NA_s4c). Describes two challenges of world models: partial observability and randomness
-- [Pieter Abbel's Lecture on Model-based RL](https://www.youtube.com/watch?v=2o1yrkbpcUk)
+- [Pieter Abbel's Lecture on Model-based RL](https://www.youtube.com/watch?v=2o1yrkbpcUk) In this video de model is used to improve the policy. The policy is trained using the world model skipping the simulator. That results in better sample efficiency. However it is very different of the planning approach I'm interested in.
 - [Yannic Kilcher World Models](https://www.youtube.com/watch?v=dPsXxLyqpfs&t)
 - [Yannic Kilcher Learning model-based planning from scratch](https://www.youtube.com/watch?v=56GW1IlWgMg)
 - [Harri Valpola: System 2 AI and Planning in Model-Based Reinforcement Learning](https://www.youtube.com/watch?v=HnZDmxYnpg4)
