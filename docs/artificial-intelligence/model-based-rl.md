@@ -23,13 +23,17 @@ Let's search for learning resources and list them to prioritize them.
 - [World-Models 🌍 Model Based Reinforcement Learning](https://www.youtube.com/watch?v=0MjI2NA_s4c). Describes two challenges of world models: partial observability and randomness
 - [Pieter Abbel's Lecture on Model-based RL](https://www.youtube.com/watch?v=2o1yrkbpcUk) In this video de model is used to improve the policy. The policy is trained using the world model skipping the simulator. That results in better sample efficiency. However it is very different of the planning approach I'm interested in.
 - [Yannic Kilcher World Models](https://www.youtube.com/watch?v=dPsXxLyqpfs&t)
-- [Yannic Kilcher Learning model-based planning from scratch](https://www.youtube.com/watch?v=56GW1IlWgMg)
+- [Yannic Kilcher Learning model-based planning from scratch](https://www.youtube.com/watch?v=56GW1IlWgMg) Describes a model
+  that learns to plan. Instead of going to an algorithm like MCTS the model learns how to prioritize
+  the planning steps (budget, depth and breath)
 - [Harri Valpola: System 2 AI and Planning in Model-Based Reinforcement Learning](https://www.youtube.com/watch?v=HnZDmxYnpg4)
-- [https://www.youtube.com/watch?v=o75ybZ-6Uu8](https://www.youtube.com/watch?v=o75ybZ-6Uu8)
+- [Dreamer v2: Mastering Atari with Discrete World Models](https://www.youtube.com/watch?v=o75ybZ-6Uu8)
 
 ### Papers
 
-- [Model-based Reinforcement Learning: A Survey](https://arxiv.org/abs/2006.16712)
+- [Model-based Reinforcement Learning: A Survey](https://arxiv.org/abs/2006.16712) This is a very good
+  review of all the options when taking the model-based rl approach.
+- [World models](https://worldmodels.github.io/)
 - [PlaNet: A Deep Planning Network for Reinforcement Learning](https://ai.googleblog.com/2019/02/introducing-planet-deep-planning.html)
 - [Dream to Control: Learning Behaviors by Latent Imagination](https://arxiv.org/abs/1912.01603)
 - [Mastering Atari with Discrete World Models](https://arxiv.org/abs/2010.02193)
