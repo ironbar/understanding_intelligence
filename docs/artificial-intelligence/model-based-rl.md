@@ -33,9 +33,45 @@ Let's search for learning resources and list them to prioritize them.
 
 - [Model-based Reinforcement Learning: A Survey](https://arxiv.org/abs/2006.16712) This is a very good
   review of all the options when taking the model-based rl approach.
-- [World models](https://worldmodels.github.io/)
+- [World models](https://worldmodels.github.io/) Interesting and simple application of the world model. I have doubts regarding wether just random exploration can be enough to fit the VAE and the world model.
+It does not use the world model for planning but to create a good representation that can be fed later to a policy.
 - [PlaNet: A Deep Planning Network for Reinforcement Learning](https://ai.googleblog.com/2019/02/introducing-planet-deep-planning.html)
 - [Dream to Control: Learning Behaviors by Latent Imagination](https://arxiv.org/abs/1912.01603)
 - [Mastering Atari with Discrete World Models](https://arxiv.org/abs/2010.02193)
 - [MuZero: Mastering Go, chess, shogi and Atari without rules](https://www.deepmind.com/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules)
 - [Vector Quantized Models for Planning](https://arxiv.org/abs/2106.04615)
+
+#### [World models](https://worldmodels.github.io/)
+
+![world models](res/2022-06-03-18-53-27.png)
+
+> The number of parameters of C, a linear model, is minimal in comparison. This choice allows us to explore more unconventional ways to train C — for example, even using evolution strategies to tackle more challenging RL tasks where the credit assignment problem is difficult.
+
+I find this cite very interesting. So apparently there are challenging tasks were typical RL strategies
+fails and evolutionary approaches are needed.
+
+> To summarize the Car Racing experiment, below are the steps taken:
+>
+> 1. Collect 10,000 rollouts from a random policy.
+> 2. Train VAE (V) to encode each frame into a latent vector z
+> 3. Train MDN-RNN (M) to model `P(z_t+1 | a_t, z_t, h_t)`
+> 4. Evolve Controller (C) to maximize the expected cumulative reward of a rollout.
+
+It is possible to train the model inside the "dream" and transfer the policy to the environment. To be able to that it's necessary to carefully control the temperature when sampling to avoid overfitting to the world model.
+
+> In our experiments, the tasks are relatively simple, so a reasonable world model can be trained using a dataset collected from a random policy. But what if our environments become more sophisticated? In any difficult environment, only parts of the world are made available to the agent only after it learns how to strategically navigate through its world.  
+> For more complicated tasks, an iterative training procedure is required. We need our agent to be able to explore its world, and constantly collect new observations so that its world model can be improved and refined over time.
+
+An iterative process is needed for the real world.
+
+> The choice of implementing V as a VAE and training it as a standalone model also has its limitations, since it may encode parts of the observations that are not relevant to a task. After all, unsupervised learning cannot, by definition, know what will be useful for the task at hand. For instance, our VAE reproduced unimportant detailed brick tile patterns on the side walls in the Doom environment, but failed to reproduce task-relevant tiles on the road in the Car Racing environment. By training together with an M that predicts rewards, the VAE may learn to focus on task-relevant areas of the image, but the tradeoff here is that we may not be able to reuse the VAE effectively for new tasks without retraining.
+
+That point of view is very interesting. I haven't imagined that using reward as target could harm the generalization of the policy.
+
+**Summary:** In this paper the world model is not used for planning but for providing a good representation
+of the world state that a very simple policy can use to learn. They force the policy to be small because
+they use an evolutionary method to improve the policy.
+
+As a final note from the paper [Qualitative Differences Between Evolutionary Strategies and Reinforcement Learning Methods for Control of Autonomous Agents](https://arxiv.org/abs/2205.07592)
+
+> EAs do not suffer from the sparsity of the reward since they operate on the basis of a fitness measure that encodes the sum of the rewards collected during evaluation episodes. RLs instead, which operate by associating rewards to specific actions, struggle with temporal credit assignment when rewards are sparse. Temporal difference in RL use bootstrapping to better handle this aspect but still struggles with sparse rewards when the time horizon is long.
