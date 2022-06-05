@@ -33,11 +33,7 @@ Let's search for learning resources and list them to prioritize them.
 
 - [Model-based Reinforcement Learning: A Survey](https://arxiv.org/abs/2006.16712) This is a very good
   review of all the options when taking the model-based rl approach.
-- [World models](https://worldmodels.github.io/) Interesting and simple application of the world model. I have doubts regarding wether just random exploration can be enough to fit the VAE and the world model.
-It does not use the world model for planning but to create a good representation that can be fed later to a policy.
 - [PlaNet: A Deep Planning Network for Reinforcement Learning](https://ai.googleblog.com/2019/02/introducing-planet-deep-planning.html)
-- [Dream to Control: Learning Behaviors by Latent Imagination](https://arxiv.org/abs/1912.01603)
-- [Mastering Atari with Discrete World Models](https://arxiv.org/abs/2010.02193)
 - [MuZero: Mastering Go, chess, shogi and Atari without rules](https://www.deepmind.com/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules)
 - [Vector Quantized Models for Planning](https://arxiv.org/abs/2106.04615)
 
@@ -75,3 +71,35 @@ they use an evolutionary method to improve the policy.
 As a final note from the paper [Qualitative Differences Between Evolutionary Strategies and Reinforcement Learning Methods for Control of Autonomous Agents](https://arxiv.org/abs/2205.07592)
 
 > EAs do not suffer from the sparsity of the reward since they operate on the basis of a fitness measure that encodes the sum of the rewards collected during evaluation episodes. RLs instead, which operate by associating rewards to specific actions, struggle with temporal credit assignment when rewards are sparse. Temporal difference in RL use bootstrapping to better handle this aspect but still struggles with sparse rewards when the time horizon is long.
+
+#### Dreamer
+
+- [Dream to Control: Learning Behaviors by Latent Imagination](https://arxiv.org/abs/1912.01603)
+- [Mastering Atari with Discrete World Models](https://arxiv.org/abs/2010.02193)
+
+This is a continuation of the World Models paper. It takes the idea of training on the dream world
+model to the extreme.
+
+> We learn the world model from a dataset of past experience, learn an actor and critic from
+imagined sequences of compact model states, and execute the actor in the environment to grow the
+experience dataset.
+
+A virtuous dynamics emerges from this approach:
+
+1. If the world model is correct then the agent will learn a good policy for the real world
+2. If the world model is incorrect the agent will learn a bad policy, but when playing on the
+real world with that policy it will gather new data that will help to correct the world model
+
+Thus given enough time the algorithm will converge: the world model will be good enough and the
+agent will learn a good policy that will transfer to the real world.
+
+The advantages of this approach are:
+
+- Faster simulation. The world model uses the latent space for predicting the transitions and that
+results on fast predictions. Moreover the GPU can be used to run the model much faster than the CPU
+- Better data efficiency. Model based RL methods are more data efficient than model free.
+
+![dreamer v2](res/2022-06-05-08-15-00.png)
+
+The world model is not used to plan, but to train a policy on the world model. This allows to
+use 10000 times more data than the real interactions with the environment.
