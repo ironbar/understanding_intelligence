@@ -6,7 +6,7 @@
 
 ## Motivation
 
-In the past I have followed [DeepMind's RL course](https://www.deepmind.com/learning-resources/reinforcement-learning-lecture-series-2018) and know I'm doing the [Hugginface's RL course](https://github.com/huggingface/deep-rl-class) to remember the concepts. However they do not dig deep into model based
+In the past I have followed [DeepMind's RL course](https://www.deepmind.com/learning-resources/reinforcement-learning-lecture-series-2018) and now I'm doing the [Hugginface's RL course](https://github.com/huggingface/deep-rl-class) to remember the concepts. However they do not dig deep into model based
 RL and that's what I want to do it now.
 
 In [Sutton and Barto](https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf) book I cannot find either anything about model based RL.
