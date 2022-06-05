@@ -33,7 +33,6 @@ Let's search for learning resources and list them to prioritize them.
 
 - [Model-based Reinforcement Learning: A Survey](https://arxiv.org/abs/2006.16712) This is a very good
   review of all the options when taking the model-based rl approach.
-- [MuZero: Mastering Go, chess, shogi and Atari without rules](https://www.deepmind.com/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules)
 - [Vector Quantized Models for Planning](https://arxiv.org/abs/2106.04615)
 
 #### [World models](https://worldmodels.github.io/)
@@ -107,3 +106,26 @@ The world model is not used to plan, but to train a policy on the world model. T
 use 10000 times more data than the real interactions with the environment.
 
 #### [PlaNet: A Deep Planning Network for Reinforcement Learning](https://ai.googleblog.com/2019/02/introducing-planet-deep-planning.html)
+
+In this case the agent needs a world model that it is used to plan the next action. It does not
+learn a value or policy function like the previous examples. The planning method does not seem to
+be very advanced or intelligent: as far as I understand it tries random sequences of actions in a
+monte carlo setup and it takes the first action of the best sequence.
+
+![planet](res/2022-06-05-16-45-57.png)
+
+> PlaNet solves a variety of image-based control tasks, competing with advanced model-free agents in terms of final performance while being 5000% more data efficient on average.
+
+This is another evidence that model-based methods are more data efficient.
+
+> In short, PlaNet learns a dynamics model given image inputs and efficiently plans with it to gather new experience. In contrast to previous methods that plan over images, we rely on a compact sequence of hidden or latent states. This is called a latent dynamics model: instead of directly predicting from one image to the next image, we predict the latent state forward.
+
+<!---->
+
+> Compared to our preceding work on world models, PlaNet works without a policy network -- it chooses actions purely by planning, so it benefits from model improvements on the spot.
+
+I find Planet very interesting, but it is very likely that it could improve planning by adding
+a policy and a value function. I believe that is what we are going to find in the next MuZero paper.
+
+#### [MuZero: Mastering Go, chess, shogi and Atari without rules](https://www.deepmind.com/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules)
+
