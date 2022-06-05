@@ -26,14 +26,13 @@ Let's search for learning resources and list them to prioritize them.
 - [Yannic Kilcher Learning model-based planning from scratch](https://www.youtube.com/watch?v=56GW1IlWgMg) Describes a model
   that learns to plan. Instead of going to an algorithm like MCTS the model learns how to prioritize
   the planning steps (budget, depth and breath)
-- [Harri Valpola: System 2 AI and Planning in Model-Based Reinforcement Learning](https://www.youtube.com/watch?v=HnZDmxYnpg4)
 - [Dreamer v2: Mastering Atari with Discrete World Models](https://www.youtube.com/watch?v=o75ybZ-6Uu8)
+- [Harri Valpola: System 2 AI and Planning in Model-Based Reinforcement Learning](https://www.youtube.com/watch?v=HnZDmxYnpg4)
 
 ### Papers
 
 - [Model-based Reinforcement Learning: A Survey](https://arxiv.org/abs/2006.16712) This is a very good
   review of all the options when taking the model-based rl approach.
-- [PlaNet: A Deep Planning Network for Reinforcement Learning](https://ai.googleblog.com/2019/02/introducing-planet-deep-planning.html)
 - [MuZero: Mastering Go, chess, shogi and Atari without rules](https://www.deepmind.com/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules)
 - [Vector Quantized Models for Planning](https://arxiv.org/abs/2106.04615)
 
@@ -91,7 +90,8 @@ A virtuous dynamics emerges from this approach:
 real world with that policy it will gather new data that will help to correct the world model
 
 Thus given enough time the algorithm will converge: the world model will be good enough and the
-agent will learn a good policy that will transfer to the real world.
+agent will learn a good policy that will transfer to the real world.  
+Humans do also correct their world model when they find unexpected situations.
 
 The advantages of this approach are:
 
@@ -101,5 +101,9 @@ results on fast predictions. Moreover the GPU can be used to run the model much 
 
 ![dreamer v2](res/2022-06-05-08-15-00.png)
 
+It is similar to a Vector Quantized autoencoder but not exactly the same.
+
 The world model is not used to plan, but to train a policy on the world model. This allows to
 use 10000 times more data than the real interactions with the environment.
+
+#### [PlaNet: A Deep Planning Network for Reinforcement Learning](https://ai.googleblog.com/2019/02/introducing-planet-deep-planning.html)
