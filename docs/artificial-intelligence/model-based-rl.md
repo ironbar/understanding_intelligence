@@ -1,6 +1,8 @@
 # Model Based Reinforcement Learning
 
-# 🚧 Work in progress 🚧
+!!! note
+
+    🚧 Work in progress 🚧
 
 ## Motivation
 
