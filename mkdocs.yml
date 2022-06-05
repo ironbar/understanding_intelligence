@@ -25,6 +25,7 @@ theme:
   favicon: res/brain-20-256.png
 
 markdown_extensions:
+  - admonition
   - pymdownx.tasklist
   - footnotes
   - tables
