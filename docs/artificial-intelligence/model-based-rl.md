@@ -35,8 +35,6 @@ Let's search for learning resources and list them to prioritize them.
 
 - [Model-based Reinforcement Learning: A Survey](https://arxiv.org/abs/2006.16712) This is a very good
   review of all the options when taking the model-based rl approach.
-- [Vector Quantized Models for Planning](https://arxiv.org/abs/2106.04615)
-- [Mastering Atari Games with Limited Data](https://arxiv.org/abs/2111.00210)
 
 #### [World models](https://worldmodels.github.io/)
 
@@ -157,3 +155,7 @@ It's interesting to see how the ability of the model increases with the size of 
 search. A difference of 1400 in elo score is massive, it means that it is almost impossible to win.
 
 ![Elo vs search time](res/2022-06-07-18-08-00.png)
+
+#### [Mastering Atari Games with Limited Data](https://arxiv.org/abs/2111.00210)
+
+#### [Vector Quantized Models for Planning](https://arxiv.org/abs/2106.04615)
