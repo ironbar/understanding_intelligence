@@ -36,6 +36,7 @@ Let's search for learning resources and list them to prioritize them.
 - [Model-based Reinforcement Learning: A Survey](https://arxiv.org/abs/2006.16712) This is a very good
   review of all the options when taking the model-based rl approach.
 - [Vector Quantized Models for Planning](https://arxiv.org/abs/2106.04615)
+- [Mastering Atari Games with Limited Data](https://arxiv.org/abs/2111.00210)
 
 #### [World models](https://worldmodels.github.io/)
 
