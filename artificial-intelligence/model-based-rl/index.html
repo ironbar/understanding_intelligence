@@ -522,6 +522,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#mastering-atari-games-with-limited-data" class="md-nav__link">
+    Mastering Atari Games with Limited Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-quantized-models-for-planning" class="md-nav__link">
+    Vector Quantized Models for Planning
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -765,6 +779,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#mastering-atari-games-with-limited-data" class="md-nav__link">
+    Mastering Atari Games with Limited Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-quantized-models-for-planning" class="md-nav__link">
+    Vector Quantized Models for Planning
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -799,7 +827,7 @@
 <p>🚧 Work in progress 🚧</p>
 </div>
 <h2 id="motivation">Motivation</h2>
-<p>In the past I have followed <a href="https://www.deepmind.com/learning-resources/reinforcement-learning-lecture-series-2018">DeepMind's RL course</a> and know I'm doing the <a href="https://github.com/huggingface/deep-rl-class">Hugginface's RL course</a> to remember the concepts. However they do not dig deep into model based
+<p>In the past I have followed <a href="https://www.deepmind.com/learning-resources/reinforcement-learning-lecture-series-2018">DeepMind's RL course</a> and now I'm doing the <a href="https://github.com/huggingface/deep-rl-class">Hugginface's RL course</a> to remember the concepts. However they do not dig deep into model based
 RL and that's what I want to do it now.</p>
 <p>In <a href="https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf">Sutton and Barto</a> book I cannot find either anything about model based RL.</p>
 <p>I believe world models will play a big role in the road of AGI. Without a world
@@ -823,7 +851,6 @@ reasoning.</p>
 <ul>
 <li><a href="https://arxiv.org/abs/2006.16712">Model-based Reinforcement Learning: A Survey</a> This is a very good
   review of all the options when taking the model-based rl approach.</li>
-<li><a href="https://arxiv.org/abs/2106.04615">Vector Quantized Models for Planning</a></li>
 </ul>
 <h4 id="world-models"><a href="https://worldmodels.github.io/">World models</a></h4>
 <p><img alt="world models" src="../res/2022-06-03-18-53-27.png" /></p>
@@ -910,13 +937,33 @@ monte carlo setup and it takes the first action of the best sequence.</p>
 <p>I find Planet very interesting, but it is very likely that it could improve planning by adding
 a policy and a value function. I believe that is what we are going to find in the next MuZero paper.</p>
 <h4 id="muzero-mastering-go-chess-shogi-and-atari-without-rules"><a href="https://www.deepmind.com/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules">MuZero: Mastering Go, chess, shogi and Atari without rules</a></h4>
+<p><img alt="muzero" src="../res/2022-06-07-17-48-33.png" /></p>
+<p>When planning Muzero expands first the actions with the higher value and the higher probability. Eventually
+all options are explored if the number of simulations is big enough.</p>
+<p><img alt="selection algorithm" src="../res/2022-06-07-17-51-24.png" /></p>
+<p>The model is trained to learn the following functions: state encoding, transition function, policy and value.
+As output receives the rewards and the results of the searches. Thus the state encoding and transition
+function are learned indirectly, they need to work well in order to be able to predict the policy and value.</p>
+<blockquote>
+<p>In this paper, the dynamics function is represented deterministically; the extension to stochastic transitions is left for future work.</p>
+</blockquote>
+<p>This is the main limitation of Muzero, does not work for stochastic environments. To be able to cope with
+the partial observability of Atari 32 frames are fed to the model to encode the state.</p>
+<p>For each board game 1000 TPUs were used for training, so that is a lot of compute power.</p>
+<p>So this approach like PlaNet learns a model of the world and it uses for planning. However the planning
+strategy used by MuZero is more advanced than the used at PlaNet.</p>
+<p>It's interesting to see how the ability of the model increases with the size of the
+search. A difference of 1400 in elo score is massive, it means that it is almost impossible to win.</p>
+<p><img alt="Elo vs search time" src="../res/2022-06-07-18-08-00.png" /></p>
+<h4 id="mastering-atari-games-with-limited-data"><a href="https://arxiv.org/abs/2111.00210">Mastering Atari Games with Limited Data</a></h4>
+<h4 id="vector-quantized-models-for-planning"><a href="https://arxiv.org/abs/2106.04615">Vector Quantized Models for Planning</a></h4>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      2022-06-05
+      2022-06-07
     
   </small>
 </div>
