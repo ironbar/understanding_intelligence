@@ -132,3 +132,28 @@ a policy and a value function. I believe that is what we are going to find in th
 
 #### [MuZero: Mastering Go, chess, shogi and Atari without rules](https://www.deepmind.com/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules)
 
+![muzero](res/2022-06-07-17-48-33.png)
+
+When planning Muzero expands first the actions with the higher value and the higher probability. Eventually
+all options are explored if the number of simulations is big enough.
+
+![selection algorithm](res/2022-06-07-17-51-24.png)
+
+The model is trained to learn the following functions: state encoding, transition function, policy and value.
+As output receives the rewards and the results of the searches. Thus the state encoding and transition
+function are learned indirectly, they need to work well in order to be able to predict the policy and value.
+
+> In this paper, the dynamics function is represented deterministically; the extension to stochastic transitions is left for future work.
+
+This is the main limitation of Muzero, does not work for stochastic environments. To be able to cope with
+the partial observability of Atari 32 frames are fed to the model to encode the state.
+
+For each board game 1000 TPUs were used for training, so that is a lot of compute power.
+
+So this approach like PlaNet learns a model of the world and it uses for planning. However the planning
+strategy used by MuZero is more advanced than the used at PlaNet.
+
+It's interesting to see how the ability of the model increases with the size of the
+search. A difference of 1400 in elo score is massive, it means that it is almost impossible to win.
+
+![Elo vs search time](res/2022-06-07-18-08-00.png)
