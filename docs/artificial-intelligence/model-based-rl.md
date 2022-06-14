@@ -158,4 +158,42 @@ search. A difference of 1400 in elo score is massive, it means that it is almost
 
 #### [Mastering Atari Games with Limited Data](https://arxiv.org/abs/2111.00210)
 
+In this paper they make 3 modifications to Muzero to be able to train on a small number of frames (100k)
+
+> In previous MCTS RL algorithms, the environment model is either given or only trained with rewards, values, and similarity policies, which cannot provide sufficient training signals due to their scalar nature.
+
+To solve the problem they use the observations of the next state also as a target. In the Muzero video
+this was mentioned and it did not brought improvements. So it seems that it helps in the small data regime.
+
+> If we only see the first observation, along with future actions, it is very hard both for an agent and a human to predict at which exact future timestep the player would lose a point. However, it is easy to predict the agent will miss the ball after a game. In this case, the right player didn’t move sufficient number of timesteps if he does not and missed the ball.
+
+The point here is to predict a single value prefix instead of multiple intermediate rewards.
+
+> This value target suffers from off-policy issues, since the trajectory is rolled out using an older policy, and thus the value target is no longer accurate. When data is limited, we have to reuse the data sampled from a much older policy, thus exaggerating the inaccurate value target issue
+> we propose to use rewards of a dynamic horizon l from the old trajectory, where l < k and l should be smaller if the trajectory is older
+
+By doing this 3 changes they are able to have good results when training just on 100k frames, for example
+DQN uses 200 million frames.
+
 #### [Vector Quantized Models for Planning](https://arxiv.org/abs/2106.04615)
+
+This paper extends the Muzero approach to stochastic and partially observable environments. To be able
+to do that it learns a model of the environment that includes the opponent player if there is any.
+For example on Muzero when playing chess the agent first chooses a move and then chooses a move for
+the opponent for planning. Instead this agent chooses a move for itself and then samples a transition
+from the environment.
+
+One drawback of this paper is that it seems to be supervised training, not self-play.
+
+The state is quantized so it is easier to sample from it.
+
+It is able to work both on Chess and DeepMind Lab.
+
+## Summary
+
+We have seen many ways of learning and using world models. Probably the closer one to how the brain
+works is the Vector Quantized Models for Planning because it learns a model of the environment and
+uses it for planning.
+
+One good thing of this kind of approach is that the model has a policy that could be used to take
+fast decisions (System 1) but can also use the world model for planning (System 2)
