@@ -1,9 +1,5 @@
 # Model Based Reinforcement Learning
 
-!!! note
-
-    🚧 Work in progress 🚧
-
 ## Motivation
 
 In the past I have followed [DeepMind's RL course](https://www.deepmind.com/learning-resources/reinforcement-learning-lecture-series-2018) and now I'm doing the [Hugginface's RL course](https://github.com/huggingface/deep-rl-class) to remember the concepts. However they do not dig deep into model based
@@ -197,3 +193,6 @@ uses it for planning.
 
 One good thing of this kind of approach is that the model has a policy that could be used to take
 fast decisions (System 1) but can also use the world model for planning (System 2)
+
+The brain world model is more powerful because it allows to plan in different time scales and it
+also can be queried using human language.
