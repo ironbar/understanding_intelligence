@@ -239,6 +239,22 @@
   
   
     <li class="md-tabs__item">
+      <a href="../../projects/connect-4/" class="md-tabs__link">
+        Projects
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../../thought-experiments/house-robot/" class="md-tabs__link">
         Thought experiments
       </a>
@@ -671,12 +687,64 @@
       
       
         <label class="md-nav__link" for="__nav_5">
+          Projects
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Projects" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Projects
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/connect-4/" class="md-nav__link">
+        Connect 4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" data-md-state="indeterminate" type="checkbox" id="__nav_6" checked>
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6">
           Thought experiments
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Thought experiments" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           Thought experiments
         </label>
@@ -836,10 +904,6 @@
 
 
 <h1 id="model-based-reinforcement-learning">Model Based Reinforcement Learning</h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>🚧 Work in progress 🚧</p>
-</div>
 <h2 id="motivation">Motivation</h2>
 <p>In the past I have followed <a href="https://www.deepmind.com/learning-resources/reinforcement-learning-lecture-series-2018">DeepMind's RL course</a> and now I'm doing the <a href="https://github.com/huggingface/deep-rl-class">Hugginface's RL course</a> to remember the concepts. However they do not dig deep into model based
 RL and that's what I want to do it now.</p>
@@ -1001,13 +1065,15 @@ works is the Vector Quantized Models for Planning because it learns a model of t
 uses it for planning.</p>
 <p>One good thing of this kind of approach is that the model has a policy that could be used to take
 fast decisions (System 1) but can also use the world model for planning (System 2)</p>
+<p>The brain world model is more powerful because it allows to plan in different time scales and it
+also can be queried using human language.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      2022-06-14
+      2022-06-15
     
   </small>
 </div>
