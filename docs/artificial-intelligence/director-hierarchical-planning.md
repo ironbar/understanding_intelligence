@@ -31,6 +31,9 @@ ploration rewards.
 So the manager asks to the worker to achieve a future world state. It has to both maximimize the rewards
 and to explore the world.
 
+The manager takes decisions every 8 steps, so it is working on a different timescale
+than the worker.
+
 <!---->
 
 > The worker is responsible for reaching the goals chosen by the manager. Because the manager outputs codes z in the discrete space of the goal autoencoder, we first decode the goals into the state space . of the world model g = dec(z). Conditioning the worker on decoded goals rather than the discrete codes has the benefit that its learning becomes approximately decoupled from the goal autoencoder. The worker policy is conditioned on the current state and goal, which changes every K = 8 time steps, and it produces primitive actions at to reach the feature space goal:
