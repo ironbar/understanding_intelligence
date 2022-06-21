@@ -49,3 +49,15 @@ learned policy.
 ## Game dynamics
 
 My intuition was correct, the center column is filled to the top at first. The predictions of the different generations of agents do not seem to be stable.
+
+## Thoughts about multiplayer games
+
+Model free methods tipically learn a value function. In a multiplayer game the skill of the opponent
+will influence that value function. If we play against different opponents during training we will
+be adding noise to the value function and thus making the learning more difficult.
+
+Always playing against the same player will result in a more stable training. But there is the risk
+of overfitting to that player by exploiting the weak points of the player.
+
+A policy could learn to play very well, but planning is more general because it will work well
+when finding new situations that were not found during training.
