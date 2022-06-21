@@ -1,9 +1,5 @@
 # Connect 4
 
-!!! note
-
-    🚧 Work in progress 🚧
-
 ## Goals
 
 1. Create an AI that is able to beat me on Connect 4 game
@@ -35,3 +31,21 @@ Let's see if we can get an agent close to the optimum.
 ## Environment
 
 We need to find an environment where we can train the agents and also play against them.
+
+## The job was already done
+
+![azfour](res/2022-06-21-17-40-19.png)
+
+I have found that Anthony Young has already [trained an alpha zero agent on connect 4](https://medium.com/@sleepsonthefloor/azfour-a-connect-four-webapp-powered-by-the-alphazero-algorithm-d0c82d6f3ae9). It has
+even a [website](https://azfour.com/) where it is possible to play against the agent, although I get connection errors very often.
+
+There are a lot of implementation details so it is worth reading the blog. It says
+that connect 4 is a good testbed for verifying that alpha zero implementation
+works correctly. So if in the future I have to do it I could use it.
+
+The version deployed on the website does not do search but instead uses just the
+learned policy.
+
+## Game dynamics
+
+My intuition was correct, the center column is filled to the top at first. The predictions of the different generations of agents do not seem to be stable.
