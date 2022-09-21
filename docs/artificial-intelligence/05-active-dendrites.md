@@ -46,7 +46,7 @@ learning scenario?
 The cited papers are [End-to-End Multi-Task Learning with Attention](https://arxiv.org/abs/1803.10704) and [Attentive Single-Tasking of Multiple Tasks](https://arxiv.org/abs/1904.08918). Those papers do
 not talk about transformers but about adding an attention mechanism can help to multi-task learning.
 Since the transformer architecture is based on attention we could make the assumption that it will
-also have good properties for multi-task learning. And moreover we have the recent publication of [Gato](../artificial-intelligence/gato.md) that shows that a transformer can learn to do a lot of tasks.
+also have good properties for multi-task learning. And moreover we have the recent publication of [Gato](../artificial-intelligence/02-gato.md) that shows that a transformer can learn to do a lot of tasks.
 
 So probably choosing a transformer as the architecture has more sense than implementing the proposed
 changes on a more classic architecture.

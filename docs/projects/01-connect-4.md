@@ -4,7 +4,7 @@
 
 1. Create an AI that is able to beat me on Connect 4 game
 2. Learn from the AI what is the best policy
-3. Compare model-free and [model-based](../artificial-intelligence/model-based-rl.md) algorithms on this game
+3. Compare model-free and [model-based](../artificial-intelligence/06-model-based-rl.md) algorithms on this game
 
 ## Motivation
 

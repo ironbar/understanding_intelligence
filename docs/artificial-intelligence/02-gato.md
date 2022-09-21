@@ -1,7 +1,7 @@
 # Gato
 
 [Gato](https://www.deepmind.com/publications/a-generalist-agent), a generalist agent, is a paper released
-by Deepmind short after [Flamingo](./flamingo.md) on May 2022.
+by Deepmind short after [Flamingo](./03-flamingo.md) on May 2022.
 
 ![gato summary](res/2022-05-15-10-33-58.png)
 
