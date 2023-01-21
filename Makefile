@@ -7,6 +7,7 @@ install: # install python dependencies
 deploy:
 	git push
 	mkdocs gh-deploy
+	make clean
 
 build:
 	mkdocs build
