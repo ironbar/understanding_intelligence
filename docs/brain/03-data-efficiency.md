@@ -17,3 +17,4 @@ Neither Llama 2 or CLIP models have matched the capabilities of humans, despite 
 - Data distribution. When humans see an object for a first time they are able to see the object from varius distances and angles. This data distribution is very different from Laion where each image is typically independent from the others.
 - Interaction of the world. As humans we have constant interaction with the world. That allows to learn a very accurate world model that will be corrected anytime it makes a wrong prediction. In the other hand current deep learning systems typically just receive passive data and are simply required to copy what humans do, without the oportunity to interact with the world.
  
+A 5 year old human does have a much better vision system than CLIP and a much more general intelligence than Llama 2. It seems we are missing something very relevant in our current models.
