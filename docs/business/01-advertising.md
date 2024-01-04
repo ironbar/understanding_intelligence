@@ -53,3 +53,5 @@ Let's imagine we are running an API on a Nvidia T4 GPU. The prize on HuggingFace
 
 So to have a profitable business we will need more than 1M visitors if using an app with banners. In the other hand using rewarded videos we will need less than 40K visitors. One interesting option would be to display the
 video when the image is being generated.
+
+This monetization could be combined with a subscription model to remove the ads.
