@@ -46,12 +46,12 @@ https://www.myhoardings.com/ads/how-much-does-it-cost-to-advertise-on-a-mobile-a
 
 Let's imagine we are running an API on a Nvidia T4 GPU. The prize on HuggingFace is \$0.60 per hour. Let's consider the worst scenario for each of the previous types of monetization. (I have removed the cost per click because it should be equivalent to the cost per mille).
 
-| monetization      | lower cost ($) | upper cost ($) | hourly min visitors | monthly min visitors | max inference time (s) |
-|-------------------|----------------|----------------|---------------------|----------------------|------------------------|
-| Smartphone banner | 0.4            | 0.5            | 1500                | 1.1E+06              | 2.4                    |
-| Cost per mille    | 3              | 10             | 200                 | 1.4E+05              | 18                     |
-| Rewarded video    | 11             | 15             | 55                  | 3.9E+04              | 66                     |
-| Full-screen add   | 6              | 9.5            | 100                 | 7.2E+04              | 36                     |
+| monetization      | min revenue ($) | hourly min visitors | monthly min visitors | max inference time (s) |
+|-------------------|-----------------|---------------------|----------------------|------------------------|
+| Smartphone banner | 0.4             | 1500                | 1.1E+06              | 2.4                    |
+| Cost per mille    | 3               | 200                 | 1.4E+05              | 18                     |
+| Rewarded video    | 11              | 55                  | 3.9E+04              | 66                     |
+| Full-screen add   | 6               | 100                 | 7.2E+04              | 36                     |
 
 So to have a profitable business we will need more than 1M visitors if using an app with banners. In the other hand using rewarded videos we will need less than 40K visitors. One interesting option would be to display the
 video when the image is being generated.
@@ -60,12 +60,12 @@ This monetization could be combined with a subscription model to remove the ads.
 
 ### Calling to an API
 
-| monetization      | lower cost ($) | max API cost ($) |
-|-------------------|----------------|------------------|
-| Smartphone banner | 0.4            | 0.0004           |
-| Cost per mille    | 3              | 0.003            |
-| Rewarded video    | 11             | 0.011            |
-| Full-screen add   | 6              | 0.006            |
+| monetization      | min revenue ($) | max API cost ($) |
+|-------------------|-----------------|------------------|
+| Smartphone banner | 0.4             | 0.0004           |
+| Cost per mille    | 3               | 0.003            |
+| Rewarded video    | 11              | 0.011            |
+| Full-screen add   | 6               | 0.006            |
 
 GPT4-Vision call is around 0.01\$, thus only a rewarded video could pay for that.
 
