@@ -67,4 +67,8 @@ This monetization could be combined with a subscription model to remove the ads.
 | Rewarded video    | 11             | 0.011            |
 | Full-screen add   | 6              | 0.006            |
 
-GPT4-Vision call is around 0.01/$, thus only a rewarded video could pay for that.
+GPT4-Vision call is around 0.01\$, thus only a rewarded video could pay for that.
+
+## Summary
+
+It is possible to monetize a machine learning model using ads.
