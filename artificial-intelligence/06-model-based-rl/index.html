@@ -1,0 +1,1331 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ironbar.github.io/understanding_intelligence/artificial-intelligence/06-model-based-rl/">
+      
+      
+        <link rel="prev" href="../05-active-dendrites/">
+      
+      
+        <link rel="next" href="../07-director-hierarchical-planning/">
+      
+      <link rel="icon" href="../../res/brain-20-256.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Model Based Reinforcement Learning - Understanding Intelligence</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-NHD48GJZG9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-NHD48GJZG9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-NHD48GJZG9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#model-based-reinforcement-learning" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Understanding Intelligence" class="md-header__button md-logo" aria-label="Understanding Intelligence" data-md-component="logo">
+      
+  <img src="../../res/brain-20-256.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Understanding Intelligence
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Model Based Reinforcement Learning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ironbar/understanding_intelligence" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Understanding Intelligence
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../01-dalle2/" class="md-tabs__link md-tabs__link--active">
+        Artificial intelligence
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../brain/01-high-level-functions-brain/" class="md-tabs__link">
+        Brain
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../business/01-advertising/" class="md-tabs__link">
+        Business
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../projects/01-connect-4/" class="md-tabs__link">
+        Projects
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../thought-experiments/01-house-robot/" class="md-tabs__link">
+        Thought experiments
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Understanding Intelligence" class="md-nav__button md-logo" aria-label="Understanding Intelligence" data-md-component="logo">
+      
+  <img src="../../res/brain-20-256.png" alt="logo">
+
+    </a>
+    Understanding Intelligence
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ironbar/understanding_intelligence" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Understanding Intelligence
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="true">
+          Artificial intelligence
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Artificial intelligence" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Artificial intelligence
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-dalle2/" class="md-nav__link">
+        Dall-e 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-gato/" class="md-nav__link">
+        Gato
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-flamingo/" class="md-nav__link">
+        Flamingo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-tesla-ai-day-2021/" class="md-nav__link">
+        Tesla AI Day 2021
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-active-dendrites/" class="md-nav__link">
+        Avoiding Catastrophical Forgetting with Active Dendrites
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Model Based Reinforcement Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Model Based Reinforcement Learning
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    Resources
+  </a>
+  
+    <nav class="md-nav" aria-label="Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#youtube" class="md-nav__link">
+    Youtube
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#papers" class="md-nav__link">
+    Papers
+  </a>
+  
+    <nav class="md-nav" aria-label="Papers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#world-models" class="md-nav__link">
+    World models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dreamer" class="md-nav__link">
+    Dreamer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planet-a-deep-planning-network-for-reinforcement-learning" class="md-nav__link">
+    PlaNet: A Deep Planning Network for Reinforcement Learning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muzero-mastering-go-chess-shogi-and-atari-without-rules" class="md-nav__link">
+    MuZero: Mastering Go, chess, shogi and Atari without rules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mastering-atari-games-with-limited-data" class="md-nav__link">
+    Mastering Atari Games with Limited Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-quantized-models-for-planning" class="md-nav__link">
+    Vector Quantized Models for Planning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-director-hierarchical-planning/" class="md-nav__link">
+        Director - Deep Hierarchical Planning from Pixels
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-question-answering/" class="md-nav__link">
+        Question Answering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-deep-learning-evolution/" class="md-nav__link">
+        Deep Learning evolution
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          Brain
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Brain" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Brain
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../brain/01-high-level-functions-brain/" class="md-nav__link">
+        High level functions of the brain
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../brain/02-sleep/" class="md-nav__link">
+        Why do we have to sleep
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../brain/03-data-efficiency/" class="md-nav__link">
+        Data efficiency
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          Business
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Business" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Business
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../business/01-advertising/" class="md-nav__link">
+        Advertising
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Projects
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Projects" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Projects
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/01-connect-4/" class="md-nav__link">
+        Connect 4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          Thought experiments
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Thought experiments" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Thought experiments
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thought-experiments/01-house-robot/" class="md-nav__link">
+        House robot
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    Resources
+  </a>
+  
+    <nav class="md-nav" aria-label="Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#youtube" class="md-nav__link">
+    Youtube
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#papers" class="md-nav__link">
+    Papers
+  </a>
+  
+    <nav class="md-nav" aria-label="Papers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#world-models" class="md-nav__link">
+    World models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dreamer" class="md-nav__link">
+    Dreamer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planet-a-deep-planning-network-for-reinforcement-learning" class="md-nav__link">
+    PlaNet: A Deep Planning Network for Reinforcement Learning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muzero-mastering-go-chess-shogi-and-atari-without-rules" class="md-nav__link">
+    MuZero: Mastering Go, chess, shogi and Atari without rules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mastering-atari-games-with-limited-data" class="md-nav__link">
+    Mastering Atari Games with Limited Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-quantized-models-for-planning" class="md-nav__link">
+    Vector Quantized Models for Planning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                 
+                  
+
+  
+  
+
+
+
+<h1 id="model-based-reinforcement-learning">Model Based Reinforcement Learning</h1>
+<h2 id="motivation">Motivation</h2>
+<p>In the past I have followed <a href="https://www.deepmind.com/learning-resources/reinforcement-learning-lecture-series-2018">DeepMind's RL course</a> and now I'm doing the <a href="https://github.com/huggingface/deep-rl-class">Hugginface's RL course</a> to remember the concepts. However they do not dig deep into model based
+RL and that's what I want to do it now.</p>
+<p>In <a href="https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf">Sutton and Barto</a> book I cannot find either anything about model based RL.</p>
+<p>I believe world models will play a big role in the road of AGI. Without a world
+model is not possible to plan, so we need them to achieve complex thinking and
+reasoning.</p>
+<h2 id="resources">Resources</h2>
+<p>Let's search for learning resources and list them to prioritize them.</p>
+<h3 id="youtube">Youtube</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=_rKzhhDRq_4">Model-free vs Model-based Reinforcement Learning -- Oriol Vinyals (11/10/2020)</a> A talk about AlphaGo, AlphaStar, Alphazero... Some initial ideas about the differences between model-free and model-based but most of the talk is about the experience of Oriol with those mentioned projects.</li>
+<li><a href="https://www.youtube.com/watch?v=0MjI2NA_s4c">World-Models 🌍 Model Based Reinforcement Learning</a>. Describes two challenges of world models: partial observability and randomness</li>
+<li><a href="https://www.youtube.com/watch?v=2o1yrkbpcUk">Pieter Abbel's Lecture on Model-based RL</a> In this video the model is used to improve the policy. The policy is trained using the world model skipping the simulator. That results in better sample efficiency. However it is very different of the planning approach I'm interested in.</li>
+<li><a href="https://www.youtube.com/watch?v=dPsXxLyqpfs&amp;t">Yannic Kilcher World Models</a></li>
+<li><a href="https://www.youtube.com/watch?v=56GW1IlWgMg">Yannic Kilcher Learning model-based planning from scratch</a> Describes a model
+  that learns to plan. Instead of going to an algorithm like MCTS the model learns how to prioritize
+  the planning steps (budget, depth and breath)</li>
+<li><a href="https://www.youtube.com/watch?v=o75ybZ-6Uu8">Dreamer v2: Mastering Atari with Discrete World Models</a></li>
+<li><a href="https://www.youtube.com/watch?v=HnZDmxYnpg4">Harri Valpola: System 2 AI and Planning in Model-Based Reinforcement Learning</a></li>
+</ul>
+<h3 id="papers">Papers</h3>
+<ul>
+<li><a href="https://arxiv.org/abs/2006.16712">Model-based Reinforcement Learning: A Survey</a> This is a very good
+  review of all the options when taking the model-based rl approach.</li>
+</ul>
+<h4 id="world-models"><a href="https://worldmodels.github.io/">World models</a></h4>
+<p><img alt="world models" src="../res/2022-06-03-18-53-27.png" /></p>
+<blockquote>
+<p>The number of parameters of C, a linear model, is minimal in comparison. This choice allows us to explore more unconventional ways to train C — for example, even using evolution strategies to tackle more challenging RL tasks where the credit assignment problem is difficult.</p>
+</blockquote>
+<p>I find this cite very interesting. So apparently there are challenging tasks were typical RL strategies
+fails and evolutionary approaches are needed.</p>
+<blockquote>
+<p>To summarize the Car Racing experiment, below are the steps taken:</p>
+<ol>
+<li>Collect 10,000 rollouts from a random policy.</li>
+<li>Train VAE (V) to encode each frame into a latent vector z</li>
+<li>Train MDN-RNN (M) to model <code>P(z_t+1 | a_t, z_t, h_t)</code></li>
+<li>Evolve Controller (C) to maximize the expected cumulative reward of a rollout.</li>
+</ol>
+</blockquote>
+<p>It is possible to train the model inside the "dream" and transfer the policy to the environment. To be able to that it's necessary to carefully control the temperature when sampling to avoid overfitting to the world model.</p>
+<blockquote>
+<p>In our experiments, the tasks are relatively simple, so a reasonable world model can be trained using a dataset collected from a random policy. But what if our environments become more sophisticated? In any difficult environment, only parts of the world are made available to the agent only after it learns how to strategically navigate through its world.<br />
+For more complicated tasks, an iterative training procedure is required. We need our agent to be able to explore its world, and constantly collect new observations so that its world model can be improved and refined over time.</p>
+</blockquote>
+<p>An iterative process is needed for the real world.</p>
+<blockquote>
+<p>The choice of implementing V as a VAE and training it as a standalone model also has its limitations, since it may encode parts of the observations that are not relevant to a task. After all, unsupervised learning cannot, by definition, know what will be useful for the task at hand. For instance, our VAE reproduced unimportant detailed brick tile patterns on the side walls in the Doom environment, but failed to reproduce task-relevant tiles on the road in the Car Racing environment. By training together with an M that predicts rewards, the VAE may learn to focus on task-relevant areas of the image, but the tradeoff here is that we may not be able to reuse the VAE effectively for new tasks without retraining.</p>
+</blockquote>
+<p>That point of view is very interesting. I haven't imagined that using reward as target could harm the generalization of the policy.</p>
+<p><strong>Summary:</strong> In this paper the world model is not used for planning but for providing a good representation
+of the world state that a very simple policy can use to learn. They force the policy to be small because
+they use an evolutionary method to improve the policy.</p>
+<p>As a final note from the paper <a href="https://arxiv.org/abs/2205.07592">Qualitative Differences Between Evolutionary Strategies and Reinforcement Learning Methods for Control of Autonomous Agents</a></p>
+<blockquote>
+<p>EAs do not suffer from the sparsity of the reward since they operate on the basis of a fitness measure that encodes the sum of the rewards collected during evaluation episodes. RLs instead, which operate by associating rewards to specific actions, struggle with temporal credit assignment when rewards are sparse. Temporal difference in RL use bootstrapping to better handle this aspect but still struggles with sparse rewards when the time horizon is long.</p>
+</blockquote>
+<h4 id="dreamer">Dreamer</h4>
+<ul>
+<li><a href="https://arxiv.org/abs/1912.01603">Dream to Control: Learning Behaviors by Latent Imagination</a></li>
+<li><a href="https://arxiv.org/abs/2010.02193">Mastering Atari with Discrete World Models</a></li>
+</ul>
+<p>This is a continuation of the World Models paper. It takes the idea of training on the dream world
+model to the extreme.</p>
+<blockquote>
+<p>We learn the world model from a dataset of past experience, learn an actor and critic from
+imagined sequences of compact model states, and execute the actor in the environment to grow the
+experience dataset.</p>
+</blockquote>
+<p>A virtuous dynamics emerges from this approach:</p>
+<ol>
+<li>If the world model is correct then the agent will learn a good policy for the real world</li>
+<li>If the world model is incorrect the agent will learn a bad policy, but when playing on the
+real world with that policy it will gather new data that will help to correct the world model</li>
+</ol>
+<p>Thus given enough time the algorithm will converge: the world model will be good enough and the
+agent will learn a good policy that will transfer to the real world.<br />
+Humans do also correct their world model when they find unexpected situations.</p>
+<p>The advantages of this approach are:</p>
+<ul>
+<li>Faster simulation. The world model uses the latent space for predicting the transitions and that
+results on fast predictions. Moreover the GPU can be used to run the model much faster than the CPU</li>
+<li>Better data efficiency. Model based RL methods are more data efficient than model free.</li>
+</ul>
+<p><img alt="dreamer v2" src="../res/2022-06-05-08-15-00.png" /></p>
+<p>It is similar to a Vector Quantized autoencoder but not exactly the same.</p>
+<p>The world model is not used to plan, but to train a policy on the world model. This allows to
+use 10000 times more data than the real interactions with the environment.</p>
+<h4 id="planet-a-deep-planning-network-for-reinforcement-learning"><a href="https://ai.googleblog.com/2019/02/introducing-planet-deep-planning.html">PlaNet: A Deep Planning Network for Reinforcement Learning</a></h4>
+<p>In this case the agent needs a world model that it is used to plan the next action. It does not
+learn a value or policy function like the previous examples. The planning method does not seem to
+be very advanced or intelligent: as far as I understand it tries random sequences of actions in a
+monte carlo setup and it takes the first action of the best sequence.</p>
+<p><img alt="planet" src="../res/2022-06-05-16-45-57.png" /></p>
+<blockquote>
+<p>PlaNet solves a variety of image-based control tasks, competing with advanced model-free agents in terms of final performance while being 5000% more data efficient on average.</p>
+</blockquote>
+<p>This is another evidence that model-based methods are more data efficient.</p>
+<blockquote>
+<p>In short, PlaNet learns a dynamics model given image inputs and efficiently plans with it to gather new experience. In contrast to previous methods that plan over images, we rely on a compact sequence of hidden or latent states. This is called a latent dynamics model: instead of directly predicting from one image to the next image, we predict the latent state forward.</p>
+</blockquote>
+<!---->
+
+<blockquote>
+<p>Compared to our preceding work on world models, PlaNet works without a policy network -- it chooses actions purely by planning, so it benefits from model improvements on the spot.</p>
+</blockquote>
+<p>I find Planet very interesting, but it is very likely that it could improve planning by adding
+a policy and a value function. I believe that is what we are going to find in the next MuZero paper.</p>
+<h4 id="muzero-mastering-go-chess-shogi-and-atari-without-rules"><a href="https://www.deepmind.com/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules">MuZero: Mastering Go, chess, shogi and Atari without rules</a></h4>
+<p><img alt="muzero" src="../res/2022-06-07-17-48-33.png" /></p>
+<p>When planning Muzero expands first the actions with the higher value and the higher probability. Eventually
+all options are explored if the number of simulations is big enough.</p>
+<p><img alt="selection algorithm" src="../res/2022-06-07-17-51-24.png" /></p>
+<p>The model is trained to learn the following functions: state encoding, transition function, policy and value.
+As output receives the rewards and the results of the searches. Thus the state encoding and transition
+function are learned indirectly, they need to work well in order to be able to predict the policy and value.</p>
+<blockquote>
+<p>In this paper, the dynamics function is represented deterministically; the extension to stochastic transitions is left for future work.</p>
+</blockquote>
+<p>This is the main limitation of Muzero, does not work for stochastic environments. To be able to cope with
+the partial observability of Atari 32 frames are fed to the model to encode the state.</p>
+<p>For each board game 1000 TPUs were used for training, so that is a lot of compute power.</p>
+<p>So this approach like PlaNet learns a model of the world and it uses for planning. However the planning
+strategy used by MuZero is more advanced than the used at PlaNet.</p>
+<p>It's interesting to see how the ability of the model increases with the size of the
+search. A difference of 1400 in elo score is massive, it means that it is almost impossible to win.</p>
+<p><img alt="Elo vs search time" src="../res/2022-06-07-18-08-00.png" /></p>
+<h4 id="mastering-atari-games-with-limited-data"><a href="https://arxiv.org/abs/2111.00210">Mastering Atari Games with Limited Data</a></h4>
+<p>In this paper they make 3 modifications to Muzero to be able to train on a small number of frames (100k)</p>
+<blockquote>
+<p>In previous MCTS RL algorithms, the environment model is either given or only trained with rewards, values, and similarity policies, which cannot provide sufficient training signals due to their scalar nature.</p>
+</blockquote>
+<p>To solve the problem they use the observations of the next state also as a target. In the Muzero video
+this was mentioned and it did not brought improvements. So it seems that it helps in the small data regime.</p>
+<blockquote>
+<p>If we only see the first observation, along with future actions, it is very hard both for an agent and a human to predict at which exact future timestep the player would lose a point. However, it is easy to predict the agent will miss the ball after a game. In this case, the right player didn’t move sufficient number of timesteps if he does not and missed the ball.</p>
+</blockquote>
+<p>The point here is to predict a single value prefix instead of multiple intermediate rewards.</p>
+<blockquote>
+<p>This value target suffers from off-policy issues, since the trajectory is rolled out using an older policy, and thus the value target is no longer accurate. When data is limited, we have to reuse the data sampled from a much older policy, thus exaggerating the inaccurate value target issue
+we propose to use rewards of a dynamic horizon l from the old trajectory, where l &lt; k and l should be smaller if the trajectory is older</p>
+</blockquote>
+<p>By doing this 3 changes they are able to have good results when training just on 100k frames, for example
+DQN uses 200 million frames.</p>
+<h4 id="vector-quantized-models-for-planning"><a href="https://arxiv.org/abs/2106.04615">Vector Quantized Models for Planning</a></h4>
+<p>This paper extends the Muzero approach to stochastic and partially observable environments. To be able
+to do that it learns a model of the environment that includes the opponent player if there is any.
+For example on Muzero when playing chess the agent first chooses a move and then chooses a move for
+the opponent for planning. Instead this agent chooses a move for itself and then samples a transition
+from the environment.</p>
+<p>One drawback of this paper is that it seems to be supervised training, not self-play.</p>
+<p>The state is quantized so it is easier to sample from it.</p>
+<p>It is able to work both on Chess and DeepMind Lab.</p>
+<h2 id="summary">Summary</h2>
+<p>We have seen many ways of learning and using world models. Probably the closer one to how the brain
+works is the Vector Quantized Models for Planning because it learns a model of the environment and
+uses it for planning.</p>
+<p>One good thing of this kind of approach is that the model has a policy that could be used to take
+fast decisions (System 1) but can also use the world model for planning (System 2)</p>
+<p>The brain world model is more powerful because it allows to plan in different time scales and it
+also can be queried using human language.</p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      2022-09-21
+    
+  </small>
+</div>
+
+
+  
+
+
+
+
+                
+
+<!-- Giscus -->
+<h2 id="__comments">Comments</h2>
+<script src="https://giscus.app/client.js" data-repo="ironbar/understanding_intelligence" data-repo-id="R_kgDOHQpKVg" data-category="General" data-category-id="DIC_kwDOHQpKVs4CPInt" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0"
+    data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" async>
+</script>
+
+<!-- Reload on palette change -->
+<script>
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object")
+        if (palette.color.scheme === "slate") {
+            var giscus = document.querySelector("script[src*=giscus]")
+            giscus.setAttribute("data-theme", "dark")
+        }
+
+        /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+        var ref = document.querySelector("[data-md-component=palette]")
+        ref.addEventListener("change", function() {
+            var palette = __md_get("__palette")
+            if (palette && typeof palette.color === "object") {
+                var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+                /* Instruct Giscus to change theme */
+                var frame = document.querySelector(".giscus-frame")
+                frame.contentWindow.postMessage({
+                        giscus: {
+                            setConfig: {
+                                theme
+                            }
+                        }
+                    },
+                    "https://giscus.app"
+                )
+            }
+        })
+    })
+</script>
+
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/guillermobarbadillo/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/guille_bar" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/channel/UCOHmUwHnd2hmUpiDzaQ1Isg" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://www.kaggle.com/ironbar" target="_blank" rel="noopener" title="www.kaggle.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M304.2 501.5 158.4 320.3 298.2 185c2.6-2.7 1.7-10.5-5.3-10.5h-69.2c-3.5 0-7 1.8-10.5 5.3L80.9 313.5V7.5q0-7.5-7.5-7.5H21.5Q14 0 14 7.5v497q0 7.5 7.5 7.5h51.9q7.5 0 7.5-7.5v-109l30.8-29.3 110.5 140.6c3 3.5 6.5 5.3 10.5 5.3h66.9q5.25 0 6-3z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+    
+  </body>
+</html>
