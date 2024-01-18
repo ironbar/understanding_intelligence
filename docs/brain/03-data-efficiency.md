@@ -5,14 +5,16 @@ Let's see how much data current deep learnings systems need compared to humans:
 - [Llama 2](https://ai.meta.com/resources/models-and-libraries/llama/) is trained on 2e12 tokens. On [OpenAI's documentation](https://www.datacamp.com/blog/gpt4-turbo#:~:text=GPT%2D4%20has%20a%20maximum,MISTRAL%2D7b%2D128k%20model.) it is said that 128k tokens are equivalent to 240 pages (at 400 words per page). Let's say that the average book has 240 pages. So 2e12 tokens is equivalent to 15 million books. A human will need 42000 years to read those books if reading one book a day.
 - [Laion-5B](https://laion.ai/blog/laion-5b/) is a dataset with 5.8e9 image-text pairs that is used to train CLIP models. If a human spend all the day watching the images at a rate of one per second it would need 184 years (without sleeping).
 - On [Alphastar](https://deepmind.google/discover/blog/alphastar-mastering-the-real-time-strategy-game-starcraft-ii/) they train each agent for the equivalent of 200 human years of of real-time StarCraft play.
-- [AlphaZero](https://arxiv.org/abs/1712.01815) played 44 million chess games, if each chess game takes around 20 minutes that would be 670 years of play.
+- [AlphaZero](https://arxiv.org/abs/1712.01815) played 44 million chess games, if each chess game takes around 20 minutes that would be 33 years of play.
+- [Minecraft from Video Pretraining](https://openai.com/research/vpt) the model is trained to imitate humans for 70k hours, which is 8 years. This is different than learning how to play by its own.
 
 | dataset         | equivalent human years |
 |-----------------|------------------------|
 | Llama 2         | 42000                  |
 | Laion 5B        | 184                    |
 | AlphaStar       | 200                    |
-| AlphaZero chess | 670                    |
+| AlphaZero chess | 33                     |
+| Minecraft       | 8                      |
 
 Neither Llama 2 or CLIP models have matched the capabilities of humans, despite using much more data. Why?
 
